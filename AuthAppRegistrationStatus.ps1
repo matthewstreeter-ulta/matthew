@@ -3,7 +3,7 @@
 # Install-Module Microsoft.Graph.Users.Authentication
 
 #region Configuration
-$SecurityGroupName = "Persona_Admin" # <--- IMPORTANT: Replace with the actual name of your security group
+$SecurityGroupName = "GROUPNAME" # <--- IMPORTANT: Replace with the actual name of your security group
 $OutputCsvPath     = ".\Temp\UsersWithoutAuthenticator-$((Get-Date).ToString('yyyyMMdd_HHmmss')).csv"
 #endregion
 
