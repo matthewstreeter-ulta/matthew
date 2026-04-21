@@ -28,7 +28,6 @@ catch {
 }
 #endregion
 
-
 #region Get Security Group and Members
 Write-Host "Searching for security group: '$GroupName'..." -ForegroundColor Cyan
 try {
@@ -75,7 +74,7 @@ foreach ($member in $groupMembers) {
 
     # Fetch user details including SignInActivity and CreatedDateTime
     try {
-        $fullUser = Get-MgUser -UserId $userId -Property UserPrincipalName, DisplayName, SignInActivity, CreatedDateTime -ErrorAction Stop
+        $fullUser = Get-MgUser -UserId $userId -Property UserPrincipalName, DisplayName, CreatedDateTime -ErrorAction Stop #SignInActivity was removed/commented out
         $userPrincipalName = $fullUser.UserPrincipalName
         $displayName       = $fullUser.DisplayName
     }
@@ -134,8 +133,8 @@ foreach ($member in $groupMembers) {
         ManagerName                  = $managerName
         ManagerEmail                 = $managerMail
         AuthenticatorStatus          = $status
-        LastSignInDateTime           = $fullUser.SignInActivity.LastSignInDateTime
-        LastSuccessfulSignInDateTime = $fullUser.SignInActivity.LastSuccessfulSignInDateTime
+        #LastSignInDateTime           = $fullUser.SignInActivity.LastSignInDateTime
+        #LastSuccessfulSignInDateTime = $fullUser.SignInActivity.LastSuccessfulSignInDateTime
         AccountCreated               = $fullUser.CreatedDateTime
         Group                        = $group.DisplayName
     })
