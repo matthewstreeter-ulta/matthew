@@ -38,7 +38,7 @@ $ldapFilter = "(&$attributeFilter(!(userAccountControl:1.2.840.113556.1.4.803:=2
 $allUsers = foreach ($ou in $SearchBase) {
     Write-Host "Searching for enabled users in '$ou' where $targetAttribute is $FilterMode..." -ForegroundColor Cyan
     try {
-        $usersInOu = Get-ADUser -LDAPFilter $ldapFilter -SearchBase $ou -Properties $attributes -ErrorAction Stop
+        $usersInOu = Get-ADUser -LDAPFilter $ldapFilter -SearchBase $ou -Properties ($attributes + "displayName") -ErrorAction Stop
         
         if ($null -ne $usersInOu) {
             Write-Host "Found $($usersInOu.Count) user(s) in '$ou'." -ForegroundColor Green
@@ -61,7 +61,7 @@ if ($allUsers.Count -eq 0) {
     # and ensure all 15 columns are explicitly created for the GridView.
     $report = foreach ($user in $allUsers) {
         $obj = [ordered]@{
-            Name              = $user.Name
+            DisplayName       = $user.DisplayName
             UserPrincipalName = $user.UserPrincipalName
             # Extract the immediate parent OU name from the DistinguishedName
             OUName            = ($user.DistinguishedName -split ',') |
