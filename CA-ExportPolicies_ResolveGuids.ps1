@@ -34,8 +34,7 @@
         Application.Read.All
 
 .EXAMPLE
-    .\Export-And-Resolve-ConditionalAccessPolicies.ps1 `
-        -OutputFolder "C:\Temp\CAPolicies"
+    .\CA-ExportPolicies_ResolveGuids.ps1.ps1 -OutputFolder "C:\Temp\CAPolicies"
 
 .NOTES
     Conditions.Applications.IncludeApplications and
